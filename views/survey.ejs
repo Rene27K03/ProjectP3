@@ -1,0 +1,19 @@
+<%- include('layout', { title: 'Sleep Survey', user: user }) %>
+
+<h2>Sleep Quality Survey</h2>
+<form action="/survey-results" method="POST">
+  <label for="sleep-hours">How many hours of sleep do you get each night?</label>
+  <input type="number" name="sleep-hours" id="sleep-hours" required><br>
+
+  <label for="quality">How would you rate your sleep quality?</label>
+  <select name="quality" id="quality" required>
+    <option value="good">Good</option>
+    <option value="fair">Fair</option>
+    <option value="poor">Poor</option>
+  </select><br>
+
+  <label for="feeling">How do you usually feel in the morning?</label>
+  <input type="text" name="feeling" id="feeling" required><br>
+
+  <button type="submit">Submit</button>
+</form>

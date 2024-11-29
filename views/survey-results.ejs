@@ -1,0 +1,15 @@
+<!-- survey-results.ejs -->
+<h2>Survey Results</h2>
+
+<!-- Display the data you just saved -->
+<ul>
+    <li><strong>Hours of Sleep:</strong> <%= userSleepData.hours %> hours</li>
+    <li><strong>Sleep Quality:</strong> <%= userSleepData.quality %></li>
+    <li><strong>Benefits of Sleep:</strong> <%= userSleepData.benefits %></li>
+    <li><strong>Negative Impacts of Poor Sleep:</strong> <%= userSleepData.negative_impacts %></li>
+    <li><strong>Preferred Bedtime:</strong> <%= userSleepData.preferred_bedtime %></li>
+    <li><strong>Sleep/Wake Pattern:</strong> <%= userSleepData.sleep_wake_pattern %></li>
+</ul>
+
+<!-- Button to go back to the tracker page -->
+<a href="/tracker" class="btn btn-primary">Back to Tracker</a>

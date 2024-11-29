@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sleep Tracker</title>
+    <link rel="stylesheet" href="/styles.css">  <!-- Link to any external CSS file -->
+</head>
+<body>
+    <h1>Track Your Sleep</h1>
+    
+    <% if (success_msg) { %> 
+        <div class="success-message">
+            <%= success_msg %>
+        </div>
+    <% } %>
+
+    <% if (error_msg) { %>
+        <div class="error-message">
+            <%= error_msg %>
+        </div>
+    <% } %>
+
+    <form action="/tracker" method="POST">
+        <!-- Sleep Hours Input -->
+        <label for="hours">Sleep Hours:</label>
+        <input type="number" name="hours" id="hours" required min="0" max="24">
+        
+        <!-- Quality of Sleep -->
+        <label for="quality">Quality of Sleep:</label>
+        <select name="quality" id="quality" required>
+            <option value="Good">Good</option>
+            <option value="Fair">Fair</option>
+            <option value="Poor">Poor</option>
+        </select>
+
+        <!-- Benefits -->
+        <label for="benefits">Benefits of Your Sleep:</label>
+        <select name="benefits" id="benefits" multiple required>
+            <option value="Improved memory and concentration">Improved memory and concentration</option>
+            <option value="Better mood and mental health">Better mood and mental health</option>
+            <option value="Increased productivity">Increased productivity</option>
+            <option value="Stronger immune system">Stronger immune system</option>
+        </select>
+
+        <!-- Negative Impacts -->
+        <label for="negative_impacts">Negative Impacts:</label>
+        <select name="negative_impacts" id="negative_impacts" multiple required>
+            <option value="Increased risk of chronic diseases">Increased risk of chronic diseases</option>
+            <option value="Reduced cognitive function">Reduced cognitive function</option>
+            <option value="Increased stress and irritability">Increased stress and irritability</option>
+            <option value="Weight gain and hormonal imbalances">Weight gain and hormonal imbalances</option>
+        </select>
+
+        <!-- Preferred Bedtime -->
+        <label for="preferred_bedtime">Preferred Bedtime:</label>
+        <input type="text" name="preferred_bedtime" id="preferred_bedtime" placeholder="e.g., 10:00 PM" pattern="^(0[1-9]|1[0-2]):[0-5][0-9] (AM|PM)$" required>
+
+        <!-- Sleep Wake Pattern -->
+        <label for="sleep_wake_pattern">Sleep/Wake Pattern:</label>
+        <select name="sleep_wake_pattern" id="sleep_wake_pattern" required>
+            <option value="Fixed">Fixed</option>
+            <option value="Varies">Varies</option>
+        </select>
+
+        <!-- Submit Button -->
+        <button type="submit">Save Sleep Data</button>
+    </form>
+
+    <footer>
+        <p><a href="/">Go back to home Page</a></p>
+    </footer>
+
+</body>
+</html>
