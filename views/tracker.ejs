@@ -8,18 +8,8 @@
 </head>
 <body>
     <h1>Track Your Sleep</h1>
-    
-    <% if (success_msg) { %> 
-        <div class="success-message">
-            <%= success_msg %>
-        </div>
-    <% } %>
 
-    <% if (error_msg) { %>
-        <div class="error-message">
-            <%= error_msg %>
-        </div>
-    <% } %>
+
 
     <form action="/tracker" method="POST">
         <!-- Sleep Hours Input -->

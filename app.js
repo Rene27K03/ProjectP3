@@ -5,9 +5,11 @@ const passport = require('passport');
 const flash = require('connect-flash');
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs'); // Add bcryptjs to handle password hashing
-const SleepData = require('./models/sleepData'); // Include your SleepData model here
+const SleepData = require('./models/SleepData'); // Include your SleepData model here
 const app = express();
 const User = require('./models/User'); // Add this line to import the User model
+
+const sleepDataRoutes = require('./routes/sleepData');
 
 // Passport configuration
 require('./config/passport')(passport);
@@ -38,6 +40,8 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use('/', sleepDataRoutes);
+
 // Global variables for flash messages
 app.use((req, res, next) => {
     res.locals.success_msg = req.flash('success_msg');
@@ -66,13 +70,21 @@ app.get('/welcome', (req, res) => {
 
 // Sleep Tracker - Survey page (input sleep data)
 app.get('/tracker', (req, res) => {
+    // Log the flash messages to the console to see what's passed
+    console.log('Flash messages:', req.flash());
+
     if (req.isAuthenticated()) {
-        res.render('tracker');  // Show form for sleep data
+        // Pass flash messages to the EJS template
+        res.render('tracker', { 
+            success_msg: req.flash('success_msg'), 
+            error_msg: req.flash('error_msg') 
+        });
     } else {
         req.flash('error_msg', 'Please log in to access the tracker');
-        res.redirect('/auth/login');  // If not authenticated, redirect to login
+        res.redirect('/auth/login');
     }
 });
+
 
 // POST route for login
 app.post('/auth/login', passport.authenticate('local', {
@@ -157,6 +169,15 @@ app.get('/tracker', (req, res) => {
     }
 });
 
+app.get('/tracker', (req, res) => {
+    // Flash the success message (only if needed)
+    req.flash('success_msg', 'Your data has been saved successfully!');
+    
+    // Render the tracker view and pass the flash message
+    res.render('tracker', { success_msg: req.flash('success_msg') });
+});
+
+
 app.post('/tracker', (req, res) => {
     if (!req.user || !req.user._id) {
         req.flash('error_msg', 'You must be logged in to save sleep data.');
@@ -172,7 +193,7 @@ app.post('/tracker', (req, res) => {
         benefits,
         negative_impacts,
         preferred_bedtime,
-        sleep_wake_pattern
+        sleep_wake_pattern,
     });
 
     sleepData.save()
@@ -240,6 +261,6 @@ app.use('/', indexRouter); // All routes for sleep tracking
 app.use('/auth', authRouter); // All routes for authentication
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+app.listen(3000, () => {
+    console.log('Server running on http://localhost:3000');
 });

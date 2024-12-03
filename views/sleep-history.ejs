@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sleep History</title>
+</head>
+<body>
+    <h1>Your Sleep History</h1>
+    <% if (userSleepData.length > 0) { %>
+        <ul>
+            <% userSleepData.forEach(data => { %>
+                <li>
+                    <p><strong>Date:</strong> <%= data.date.toISOString().split('T')[0] %></p>
+                    <p><strong>Hours:</strong> <%= data.hours %></p>
+                    <p><strong>Quality:</strong> <%= data.quality %></p>
+                    <p><strong>Benefits:</strong> <%= data.benefits.join(', ') %></p>
+                    <p><strong>Negative Impacts:</strong> <%= data.negative_impacts.join(', ') %></p>
+                    <p><strong>Preferred Bedtime:</strong> <%= data.preferred_bedtime %></p>
+                    <p><strong>Sleep/Wake Pattern:</strong> <%= data.sleep_wake_pattern %></p>
+                </li>
+            <% }); %>
+        </ul>
+    <% } else { %>
+        <p>No sleep history available.</p>
+    <% } %>
+
+    <!-- Button to navigate back to the sleep tracker -->
+    <div style="margin-top: 20px;">
+        <a href="/tracker" style="text-decoration: none;">
+            <button style="padding: 10px 20px; background-color: #007BFF; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                Back to Tracker
+            </button>
+        </a>
+    </div>
+</body>
+</html>
