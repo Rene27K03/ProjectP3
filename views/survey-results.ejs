@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Survey Results</title>
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
     <h1>Survey Results</h1>
@@ -17,9 +18,10 @@
         <li><strong>Sleep/Wake Pattern:</strong> <%= userSleepData.sleep_wake_pattern || 'Not provided' %></li>
     </ul>
 
-    <a href="/tracker">Back to Tracker</a>
-    <!-- Link to view all sleep data -->
-    <a href="/sleep-history">View Your Sleep History</a>
+    <div class="button-box">
+        <a href="/tracker" class="button">Back to Tracker</a>
+        <a href="/sleep-history" class="button">View Your Sleep History</a>
+    </div>
 
 </body>
 </html>
